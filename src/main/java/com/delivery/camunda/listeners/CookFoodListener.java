@@ -3,6 +3,7 @@ package com.delivery.camunda.listeners;
 import com.delivery.camunda.delegates.enums.MessageNames;
 import com.delivery.camunda.driver.RestDriver;
 import com.delivery.camunda.entity.Order;
+import lombok.RequiredArgsConstructor;
 import org.camunda.community.rest.client.invoker.ApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,16 +15,12 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
+@RequiredArgsConstructor
 public class CookFoodListener {
     public static final String COOK_FOOD_TOPIC = "cookFoodTopic";
     private final Logger LOGGER = LoggerFactory.getLogger(CookFoodListener.class);
     private final RestDriver restDriver;
     private final KafkaTemplate<String, Order> kafkaTemplate;
-    @Autowired
-    public CookFoodListener(RestDriver restDriver, KafkaTemplate<String, Order> kafkaTemplate) {
-        this.restDriver = restDriver;
-        this.kafkaTemplate = kafkaTemplate;
-    }
 
     @KafkaListener(id = "cookFood", topics = COOK_FOOD_TOPIC, clientIdPrefix = "cookFoodClientId")
     public void listen(Order data) throws ApiException {

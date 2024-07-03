@@ -2,23 +2,20 @@ package com.delivery.camunda;
 
 import com.delivery.camunda.entity.Order;
 import net.datafaker.Faker;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 @Component
-public class MSImitationComponent {
+public class MsImitationComponent {
     private final KafkaTemplate<String, Order> kafkaTemplate;
     private int counter = 0;
 
-    public MSImitationComponent(KafkaTemplate<String, Order> kafkaTemplate) {
+    public MsImitationComponent(KafkaTemplate<String, Order> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
 
     }

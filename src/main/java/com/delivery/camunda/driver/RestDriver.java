@@ -2,6 +2,7 @@ package com.delivery.camunda.driver;
 
 
 import com.delivery.camunda.entity.Order;
+import lombok.RequiredArgsConstructor;
 import org.camunda.community.rest.client.api.EventSubscriptionApi;
 import org.camunda.community.rest.client.api.MessageApi;
 import org.camunda.community.rest.client.dto.CorrelationMessageDto;
@@ -15,16 +16,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@RequiredArgsConstructor
 public class RestDriver {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestDriver.class);
     private final MessageApi messageApi;
     private final EventSubscriptionApi eventSubscriptionApi;
 
-
-    public RestDriver(MessageApi messageApi, EventSubscriptionApi eventSubscriptionApi) {
-        this.messageApi = messageApi;
-        this.eventSubscriptionApi = eventSubscriptionApi;
-    }
 
     private void execute(CorrelationMessageDto correlationMessageDto) throws ApiException {
         messageApi.deliverMessage(correlationMessageDto);
